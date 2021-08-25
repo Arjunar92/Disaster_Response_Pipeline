@@ -52,7 +52,7 @@ File ..models/train_classifier.py, contains the ML pipeline.
 3. Flask Web App
 
 Modify file paths for database and model as needed
-Add data visualizations using Plotly in the web app. One example is provided for you
+Add data visualizations using Plotly in the web app.
 
 ![image](https://user-images.githubusercontent.com/35266145/130718444-dec881e6-d8fc-4a22-9b42-f8e0f8bf20fa.png)
 
