@@ -7,11 +7,7 @@
   - [ML Pipeline](#ml_pipeline)
   - [Flask Web App](#flask)
 - [ Executing Program](#Executing_Program)
-  - [Data Cleaning](#cleaning)
-  - [Training Classifier](#training)
-  - [Starting the Web App](#starting)
 - [Files](#files)
-- [Software Requirements](#sw)
 - [Acknowledgements](#ack)
 
 <a id='overview'></a>
