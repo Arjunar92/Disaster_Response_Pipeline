@@ -10,10 +10,9 @@
   - [Data Cleaning](#cleaning)
   - [Training Classifier](#training)
   - [Starting the Web App](#starting)
-- [Conclusion](#conclusion)
 - [Files](#files)
 - [Software Requirements](#sw)
-- [Credits and Acknowledgements](#credits)
+- [Acknowledgements](#ack)
 
 <a id='overview'></a>
 ## Project Overview
@@ -76,4 +75,17 @@ Add data visualizations using Plotly in the web app.
 
 3. Go to http://0.0.0.0:3001/
 
+
+
+<a id='files'></a>
+## Files
+
+![image](https://user-images.githubusercontent.com/35266145/131012778-4cf7b4b5-b4f0-451a-bb86-d27df9ac7cc3.png)
+
+
+
+<a id='ack'></a>
+## Acknowledgements
+Udacity - For the high quality Nano degree program.
+Figure Eight- For the dataset. 
 
