@@ -86,6 +86,8 @@ Add data visualizations using Plotly in the web app.
 
 <a id='ack'></a>
 ## Acknowledgements
+
 Udacity - For the high quality Nano degree program.
+
 Figure Eight- For the dataset. 
 
