@@ -4,6 +4,17 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    
+    """
+    Load Messages Data with Categories Function
+    
+    Arguments:
+        messages_filepath -> Path to the CSV file containing messages
+        categories_filepath -> Path to the CSV file containing categories
+    Returns:
+        df -> Combined data containing messages and categories
+    """
+    
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = pd.merge(messages , categories, on = 'id', how = 'inner' )
@@ -12,6 +23,18 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    
+    
+    """
+    Cleans the combined dataframe for use by ML model
+    
+    Arguments:
+    df pandas_dataframe: Merged dataframe returned from load_data() function
+    
+    Returns:
+    df pandas dataframe, Cleaned data to be used by ML model
+    
+    """
     categories = df['categories'].str.split(pat = ';' , expand= True)
     
     # select the first row of the categories dataframe
@@ -43,16 +66,39 @@ def clean_data(df):
     
     # drop duplicates
     df = df.drop_duplicates()
+    df = df[df['related'] != 2]
     
     return df
 
 
 def save_data(df, database_filename):
+    
+    """
+    Saves cleaned data to an SQL database
+    
+    Arguments:
+    
+    df pandas_dataframe: Cleaned data returned from clean_data() function
+    database_file_name: File path of SQL Database into which the cleaned
+    data is to be saved
+    
+    Returns:
+    None
+    """    
     engine = create_engine('sqlite:///DisasterResponse.db')
     df.to_sql('DisasterResponseTable', engine, index=False , if_exists='replace')
 
 
 def main():
+    
+    
+    """
+    Main function which will kick off the data processing functions. There are three primary actions taken by this function:
+        1) Load Messages Data with Categories
+        2) Clean Categories Data
+        3) Save Data to SQLite Database
+    """
+
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]

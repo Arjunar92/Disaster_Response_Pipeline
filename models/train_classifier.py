@@ -26,6 +26,19 @@ import warnings
 warnings.filterwarnings('ignore')  # "error", "ignore", "always", "default", "module" or "once"
 
 def load_data(database_filepath):
+    
+    """
+    Load Data from the SQL Database.
+    
+    Arguments:
+        database_filepath -> database destination filepath (e.g. disaster_response_db.db)
+        
+    Returns:
+        X -> a dataframe containing features
+        Y -> a dataframe containing labels
+        category_names -> List of categories name
+    """    
+
     engine = create_engine('sqlite:///DisasterResponse.db')
     df = pd.read_sql("DisasterResponseTable", engine)
     df = df[df['related'] != 2]
@@ -37,6 +50,17 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    
+    
+    """
+    Tokenizes text data
+    Argumentss:
+    text str: Messages as text data
+    
+    Returns:
+    words list: Processed text after normalizing, tokenizing and lemmatizing
+    """
+    
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
     detected_urls = re.findall(url_regex , text)
     
@@ -55,6 +79,15 @@ def tokenize(text):
 
 
 def build_model():
+    
+    """
+    Build model with GridSearchCV
+    
+    Return:
+    Trained model after performing grid search
+    """    
+    
+    
     pipeline_improved = Pipeline([
         
     ('features', FeatureUnion([
@@ -85,6 +118,16 @@ def build_model():
     return cv_improved
 
 def evaluate_model(model, X_test, y_test, category_names):
+
+    """
+    Shows model's performance on test data
+    Arguments:
+    model: trained model
+    X_test: Test features
+    y_test: Test targets
+    category_names: Target labels
+    """
+    
     y_pred = model.predict(X_test)
     
     for i in range(len(category_names)):
@@ -96,10 +139,34 @@ def evaluate_model(model, X_test, y_test, category_names):
     print(classification_report(y_test.iloc[:, 0:].values, np.array([x[0:] for x in y_pred]), target_names = category_names))
     print('Accuracy {}\n\n'.format(accuracy_score(y_test.iloc[:, i].values, y_pred[:, i])))
 
+    
 def save_model(model, model_filepath):
+    
+    """
+    Saves the model to a Python pickle file    
+    Arguments:
+    model: Trained model
+    model_filepath: Filepath to save the model
+
+    """
+
     pickle.dump(model, open('model.pkl', 'wb'))
 
 def main():
+    
+    
+    """
+    Train Classifier Main function
+    
+    This function applies the Machine Learning Pipeline:
+        1) Extract data from SQLite db
+        2) Train ML model on training set
+        3) Check for model performance on test set
+        4) Save trained model as a Pickle file
+    
+    """
+    
+    
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
