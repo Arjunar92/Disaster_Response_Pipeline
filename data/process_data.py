@@ -66,6 +66,8 @@ def clean_data(df):
     
     # drop duplicates
     df = df.drop_duplicates()
+    
+    #Convert all categories to binary
     df = df[df['related'] != 2]
     
     return df
