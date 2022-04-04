@@ -19,7 +19,6 @@ The data contains real messages that were sent during disaster events. The objec
 
 Once the model is ready, we will be displaying the result in a Flask Web app, such that anyone should be able to input a new message and get classification results in several categories. The web app will also display visualizations of the data.
 
-
 <a id='components'></a>
 ## Project Components
 
